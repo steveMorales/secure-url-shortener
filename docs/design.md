@@ -22,14 +22,17 @@ Currently no database -> v1 will have in-memory dict storage
 
 302 redirect: I want to track every time the link is clicked. This will result in higher load on server but would add data collection capabilities and allow me to add a feature to potentially track site visits
 
-Max URL Length: 2048 characters
+Max URL Length: 2048 characters -> common practice to max at this to avoid issues
 
 Error Handling: 
 
 400 Bad Request: invalid URL
-422 Unprocessable Content: Longer than 2048 characters
 403 Forbidden: Blocked Domain, can add these in for malicious sites
 
 Success:
 
 200 OK: Returns the shortened url
+
+Code length will be 6 so should create 62^6 unique codes (alphabet size is 62 in base62). This is ideal because the likelihood of a collision with a new code and an existing code is extremely low. Similarly its very unlikely that an attacker will guess a code correctly with a code length of 6 especially in v1.
+
+
