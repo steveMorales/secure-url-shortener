@@ -31,7 +31,8 @@ Error Handling:
 
 Success:
 
-200 OK: Returns the shortened url
+200 OK
+201 Created
 
 Code length will be 6 so should create 62^6 unique codes (alphabet size is 62 in base62). This is ideal because the likelihood of a collision with a new code and an existing code is extremely low. Similarly its very unlikely that an attacker will guess a code correctly with a code length of 6 especially in v1.
 
