@@ -1,7 +1,3 @@
-#Going to import FastAPI TestClient and app object from app.main
-# Test function
-# GET request /health
-# assert: code is 200, response message contains correct status
 from fastapi.testclient import TestClient
 from app.main import app
 
