@@ -18,7 +18,7 @@ Repeated URL -> keep all old codes valid (this could result in memory issues)
 
 URL Schemes -> beginning with only http:// and https:// all others "invalid"
 
-Currently no database -> v1 will have in-memory dict storage
+Currently no database -> v1 will have in-memory dict storage (currently as of 10/16 hardcoded code in so it can only store one URL at a time)
 
 302 redirect: I want to track every time the link is clicked. This will result in higher load on server but would add data collection capabilities and allow me to add a feature to potentially track site visits
 
@@ -31,8 +31,11 @@ Error Handling:
 
 Success:
 
-200 OK: Returns the shortened url
+200 OK
+201 Created
 
 Code length will be 6 so should create 62^6 unique codes (alphabet size is 62 in base62). This is ideal because the likelihood of a collision with a new code and an existing code is extremely low. Similarly its very unlikely that an attacker will guess a code correctly with a code length of 6 especially in v1.
 
+shared dictionary: url_store
+- shared between the two endpoints
 
