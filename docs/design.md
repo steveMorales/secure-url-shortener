@@ -9,10 +9,11 @@ Design Notes:
 
 Short code generation
 
-1. Random String -> predictable?
-    Can account for this via pythons secret module (maybe random but that is predictable too)
+1. Random String -> utilizing the secrets module in our helper we have less predictability than using the random module
+
 2. Hash of URL -> collisions? 
     retry on collision
+        We run a loop if the code exists in the url_store to avoid code collisions + the code is 7 characters long with alphabet and digits so we would be looking at 62^7 options
 
 Repeated URL -> keep all old codes valid (this could result in memory issues)
 
@@ -34,7 +35,7 @@ Success:
 200 OK
 201 Created
 
-Code length will be 6 so should create 62^6 unique codes (alphabet size is 62 in base62). This is ideal because the likelihood of a collision with a new code and an existing code is extremely low. Similarly its very unlikely that an attacker will guess a code correctly with a code length of 6 especially in v1.
+Code length will be 7 so should create 62^7 unique codes (alphabet size is 62 in base62). This is ideal because the likelihood of a collision with a new code and an existing code is extremely low. Similarly its very unlikely that an attacker will guess a code correctly with a code length of 6 especially in v1.
 
 shared dictionary: url_store
 - shared between the two endpoints

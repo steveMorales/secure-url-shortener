@@ -1,6 +1,7 @@
 from fastapi import FastAPI, status, HTTPException
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, HttpUrl
+from app.utils import random_code_generation
 
 class UrlResponse(BaseModel):
     code : str
@@ -18,8 +19,12 @@ def get_health():
 
 @app.post("/shorten", response_model=UrlResponse, status_code=status.HTTP_201_CREATED)
 def post_shorten(payload : UrlRequest):
-    code = "50test" #temporarily hardcoded
-    url_store[code] = str(payload.url) #save: code -> the URL the client sent
+    code = random_code_generation()
+    #loop until code is not in url store to avoid collisions
+    while code in url_store:
+        code = random_code_generation()
+    url_store[code] = str(payload.url)
+
     return {"code" : code}
 
 @app.get("/{code}")
